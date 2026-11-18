@@ -1,0 +1,13 @@
+.venv/
+node_modules/
+dist/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.git/
+.env
+*.zip
+data/raw/pol_nli_train.parquet
+data/raw/pol_nli_validation.parquet
+data/raw/pol_nli_test.parquet

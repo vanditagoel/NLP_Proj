@@ -11,12 +11,9 @@ import joblib
 import numpy as np
 import pandas as pd
 
-from ml.evaluation.evaluate import evaluate_all_trained_models
 from ml.models.classical import CLASSICAL_MODEL_SPECS
-from ml.models.transformer import TRANSFORMER_MODEL_SPECS, predict_with_saved_transformer
+from ml.models.specs import TRANSFORMER_MODEL_SPECS
 from ml.preprocessing.cleaner import clean_text, detect_script_language
-from ml.training.train_classical import train_classical_models
-from ml.training.train_transformer import run_transformer_training
 from ml.utils import (
     CHARTS_DIR,
     LABELS,
@@ -194,10 +191,11 @@ def predict_single(text: str, language: str = "Auto", model_key: str = "tfidf_lo
         model_dir = MODELS_DIR / model_key
         if not (model_dir / "config.json").exists():
             raise FileNotFoundError("Model not trained")
-        preds, probs_mat = predict_with_saved_transformer(model_dir, [cleaned])
-        pred = preds[0]
+        from ml.models.transformer import predict_with_saved_transformer
         from transformers import AutoConfig
 
+        preds, probs_mat = predict_with_saved_transformer(model_dir, [cleaned])
+        pred = preds[0]
         cfg = AutoConfig.from_pretrained(model_dir)
         classes = [str(cfg.id2label[i]) for i in range(len(cfg.id2label))]
         prob_map = _format_prob_dict(classes, probs_mat[0])
@@ -236,11 +234,12 @@ def predict_batch_texts(texts: list[str], model_key: str) -> list[dict[str, Any]
         model_dir = MODELS_DIR / model_key
         if not (model_dir / "config.json").exists():
             raise FileNotFoundError("Model not trained")
+        from ml.models.transformer import predict_with_saved_transformer
+        from transformers import AutoConfig
+
         t0 = time.perf_counter()
         preds, probs = predict_with_saved_transformer(model_dir, cleaned_list)
         per_row_ms = round(((time.perf_counter() - t0) * 1000.0) / max(1, len(texts)), 2)
-        from transformers import AutoConfig
-
         cfg = AutoConfig.from_pretrained(model_dir)
         classes = [str(cfg.id2label[i]) for i in range(len(cfg.id2label))]
     else:
@@ -328,18 +327,25 @@ def start_background_training(model_keys: list[str], epochs: int | None = None) 
 
     def _worker() -> None:
         try:
+            from ml.evaluation.evaluate import evaluate_all_trained_models
+
             classical_keys = [k for k in model_keys if k in CLASSICAL_MODEL_SPECS]
             transformer_keys = [k for k in model_keys if k in TRANSFORMER_MODEL_SPECS]
             if classical_keys:
+                from ml.training.train_classical import train_classical_models
+
                 train_classical_models(mode="climate_stance", selected_keys=classical_keys)
                 for ck in classical_keys:
                     _CLASSICAL_CACHE.pop(ck, None)
                     _TRAIN_STATUS["last_completed"].append(ck)
 
-            for tk in transformer_keys:
-                _TRAIN_STATUS["current_model"] = tk
-                run_transformer_training(model_key=tk, epochs=epochs)
-                _TRAIN_STATUS["last_completed"].append(tk)
+            if transformer_keys:
+                from ml.training.train_transformer import run_transformer_training
+
+                for tk in transformer_keys:
+                    _TRAIN_STATUS["current_model"] = tk
+                    run_transformer_training(model_key=tk, epochs=epochs)
+                    _TRAIN_STATUS["last_completed"].append(tk)
 
             evaluate_all_trained_models()
         except Exception as exc:
