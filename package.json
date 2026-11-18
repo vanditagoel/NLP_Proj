@@ -7,6 +7,9 @@
     "dev": "tsx server.ts",
     "start": "node server.ts",
     "build": "vite build",
+    "build:frontend": "vite build",
+    "build:charts": "node -e \"const fs=require('fs');if(fs.existsSync('results/charts')){fs.cpSync('results/charts','dist/charts',{recursive:true,force:true});}\"",
+    "vercel-build": "npm run build:frontend && npm run build:charts",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit"
