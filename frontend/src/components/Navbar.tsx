@@ -59,7 +59,7 @@ export function Navbar({ activeTab, onSelect }: NavbarProps) {
 
         <div className="hidden items-center gap-1.5 text-xs text-slate-500 lg:flex">
           <Cpu className="h-3.5 w-3.5 text-teal-700" />
-          <span>Real FastAPI + PyTorch/sklearn</span>
+          <span>Indic &amp; Multilingual Transformers</span>
         </div>
       </div>
     </header>

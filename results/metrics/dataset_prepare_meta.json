@@ -1,26 +1,26 @@
 {
   "mode": "climate_stance",
-  "dataset_origin": "pol_nli_paired_hypotheses + translated_hi_bn",
-  "total_rows": 400,
-  "unique_groups": 200,
+  "dataset_origin": "pol_nli + tweet_eval(stance_climate) + climate_fever + indic_parallel_corpus",
+  "total_rows": 22202,
+  "unique_groups": 11952,
   "splits": {
-    "Train": 280,
-    "Validation": 60,
-    "Test": 60
+    "Train": 15535,
+    "Test": 3369,
+    "Validation": 3298
   },
   "languages": {
-    "English": 200,
-    "Hindi": 100,
-    "Bengali": 100
+    "English": 11952,
+    "Hindi": 5125,
+    "Bengali": 5125
   },
   "labels": {
-    "None": 190,
-    "Favour": 160,
-    "Against": 50
+    "None": 6939,
+    "Against": 6367,
+    "Favour": 8896
   },
   "translation_status": {
-    "Original": 200,
-    "Translated": 200
+    "Original": 11952,
+    "Translated": 10250
   },
   "leakage_verified": true
 }

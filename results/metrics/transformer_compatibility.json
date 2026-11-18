@@ -3,30 +3,24 @@
     "model_key": "muril",
     "hf_id": "google/muril-base-cased",
     "compatible": true,
-    "vocab_size": 197285,
-    "model_type": "bert",
-    "sample_token_count": 11
+    "tokenizer_type": "wordpiece"
   },
   {
     "model_key": "mbert",
     "hf_id": "bert-base-multilingual-cased",
     "compatible": true,
-    "vocab_size": 119547,
-    "model_type": "bert",
-    "sample_token_count": 24
+    "tokenizer_type": "wordpiece"
   },
   {
     "model_key": "xlmr",
     "hf_id": "xlm-roberta-base",
     "compatible": true,
-    "vocab_size": 250002,
-    "model_type": "xlm-roberta",
-    "sample_token_count": 16
+    "tokenizer_type": "sentencepiece"
   },
   {
     "model_key": "indicbert",
-    "hf_id": "ai4bharat/indic-bert",
-    "compatible": false,
-    "error": "You are trying to access a gated repo.\nMake sure to have access to it at https://huggingface.co/ai4bharat/indic-bert.\n401 Client Error. (Request ID: Root=1-6afdc0b4-5b1e1f425442013f2d988b6e;51c9f9ec-5206-4ad5-9c0f-3d34863c4b6a)\n\nCannot access gated repo for url https://huggingface.co/ai4bharat/indic-bert/resolve/4842dd258ecc0546f0d660b76a3b22a9c632f401/config.json.\nAccess to model ai4bharat/indic-bert is restricted. You must have access to it and be authenticated to access it. Please log in."
+    "hf_id": "ai4bharat/IndicBERTv2-MLM-only",
+    "compatible": true,
+    "tokenizer_type": "indicbert"
   }
 ]

@@ -13,6 +13,7 @@ export interface ProjectOverview {
   best_model_name: string | null;
   total_samples: number;
   trained_models_count: number;
+  total_models_count?: number;
 }
 
 export interface PerClassMetric {

@@ -66,10 +66,10 @@ export function HomePage({ project, onNavigate }: HomePageProps) {
         <div className="rounded-xl border border-slate-200 bg-white p-5">
           <p className="text-xs font-medium text-slate-500">Trained Models Ready</p>
           <p className="mt-1.5 text-2xl font-bold text-slate-900 tabular-nums">
-            {project ? `${project.trained_models_count} / 9` : '0 / 9'}
+            {project ? `${project.trained_models_count} / ${project.total_models_count ?? 4}` : '0 / 4'}
           </p>
           <p className="mt-1 text-xs text-slate-500">
-            Classical TF-IDF, Word2Vec/FastText &amp; HF Transformers
+            MuRIL, mBERT, XLM-RoBERTa &amp; IndicBERTv2 Transformers
           </p>
         </div>
 

@@ -31,7 +31,7 @@ export function ModelTestingPage({ models }: { models: RegisteredModel[] }) {
   const trainedModels = models.filter((m) => m.trained);
   const [text, setText] = useState(EXAMPLES[0].text);
   const [language, setLanguage] = useState('Auto');
-  const [selectedModel, setSelectedModel] = useState<string>(trainedModels[0]?.model_key || 'tfidf_logreg');
+  const [selectedModel, setSelectedModel] = useState<string>(trainedModels[0]?.model_key || 'muril');
   const [compareMode, setCompareMode] = useState(false);
 
   const [loading, setLoading] = useState(false);
@@ -45,7 +45,7 @@ export function ModelTestingPage({ models }: { models: RegisteredModel[] }) {
   const [csvPreviewRows, setCsvPreviewRows] = useState<string[][]>([]);
   const [textColumn, setTextColumn] = useState('text');
   const [batchModelKeys, setBatchModelKeys] = useState<string[]>(
-    trainedModels.length > 0 ? [trainedModels[0].model_key] : ['tfidf_logreg']
+    trainedModels.length > 0 ? [trainedModels[0].model_key] : ['muril']
   );
   const [batchLoading, setBatchLoading] = useState(false);
   const [batchError, setBatchError] = useState<string | null>(null);

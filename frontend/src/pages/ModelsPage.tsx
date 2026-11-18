@@ -11,7 +11,7 @@ interface ModelsPageProps {
 
 export function ModelsPage({ models, evaluation, onRefresh }: ModelsPageProps) {
   const [selectedKey, setSelectedKey] = useState<string>(
-    evaluation?.best_model_key || evaluation?.models?.[0]?.model_key || 'tfidf_logreg'
+    evaluation?.best_model_key || evaluation?.models?.[0]?.model_key || 'muril'
   );
   const [trainingBusy, setTrainingBusy] = useState(false);
   const [trainMsg, setTrainMsg] = useState<string | null>(null);
@@ -19,17 +19,11 @@ export function ModelsPage({ models, evaluation, onRefresh }: ModelsPageProps) {
   const evalModels = evaluation?.models || [];
   const activeEval = evalModels.find((m) => m.model_key === selectedKey) || evalModels[0] || null;
 
-  async function handleRetrainClassical() {
+  async function handleRetrainTransformers() {
     setTrainingBusy(true);
-    setTrainMsg('Training classical & embedding baselines on splits...');
+    setTrainMsg('Training all 4 Transformer models on 20k+ dataset splits...');
     try {
-      const res = await api.triggerTraining([
-        'tfidf_logreg',
-        'tfidf_svm',
-        'tfidf_nb',
-        'word2vec_lr',
-        'fasttext_lr',
-      ]);
+      const res = await api.triggerTraining(['muril', 'mbert', 'xlmr', 'indicbert']);
       if (!res.started) {
         setTrainMsg(res.reason || 'Training already running.');
       } else {
@@ -38,7 +32,7 @@ export function ModelsPage({ models, evaluation, onRefresh }: ModelsPageProps) {
           if (!st.running) {
             clearInterval(timer);
             setTrainingBusy(false);
-            setTrainMsg(st.last_error ? `Error: ${st.last_error}` : 'Classical models retrained & evaluated.');
+            setTrainMsg(st.last_error ? `Error: ${st.last_error}` : 'All 4 Transformer models retrained, saved & evaluated.');
             onRefresh();
           }
         }, 1500);
@@ -63,11 +57,11 @@ export function ModelsPage({ models, evaluation, onRefresh }: ModelsPageProps) {
           <button
             type="button"
             disabled={trainingBusy}
-            onClick={handleRetrainClassical}
+            onClick={handleRetrainTransformers}
             className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-60"
           >
             {trainingBusy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Play className="h-3.5 w-3.5" />}
-            Re-run Classical Baselines
+            Re-train Transformer Models
           </button>
         </div>
 

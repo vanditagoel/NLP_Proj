@@ -1,6 +1,5 @@
-model_key,model_name,accuracy,macro_f1,weighted_f1,precision_macro,recall_macro,hindi_macro_f1,bengali_macro_f1,english_macro_f1,avg_inference_ms
-word2vec_lr,Word2Vec + Logistic Regression,0.45,0.4001,0.473,0.4272,0.425,0.3016,0.4286,0.3676,0.0699
-tfidf_svm,TF-IDF + Linear SVM,0.5833,0.399,0.5485,0.3796,0.4222,0.3056,0.4238,0.416,0.4761
-tfidf_nb,TF-IDF + Multinomial Naive Bayes,0.55,0.3753,0.5181,0.3562,0.3972,0.2929,0.2635,0.4632,0.3944
-tfidf_logreg,TF-IDF + Logistic Regression,0.5,0.3651,0.5036,0.3672,0.3639,0.2424,0.3622,0.416,0.407
-fasttext_lr,FastText + Logistic Regression,0.3667,0.2839,0.3959,0.3155,0.2611,0.3175,0.1667,0.3244,0.2913
+model_key,model_name,accuracy,macro_f1,weighted_f1,precision_macro,recall_macro,hindi_macro_f1,bengali_macro_f1,english_macro_f1,avg_inference_ms,training_seconds
+muril,MuRIL (google/muril-base-cased),0.8976,0.9005,0.8992,0.9079,0.9055,0.9902,0.993,0.8167,2.6985,104.85
+indicbert,IndicBERTv2 (ai4bharat/IndicBERTv2-MLM-only),0.8848,0.8891,0.8869,0.8966,0.891,0.9837,0.9832,0.8034,2.9539,109.32
+mbert,mBERT (bert-base-multilingual-cased),0.873,0.8767,0.874,0.8915,0.8851,0.978,0.9464,0.8025,2.9326,108.47
+xlmr,XLM-RoBERTa (xlm-roberta-base),0.8718,0.875,0.8729,0.8783,0.8729,0.9891,0.9893,0.7773,3.211,117.3

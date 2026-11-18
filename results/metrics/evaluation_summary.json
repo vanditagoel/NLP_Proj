@@ -1,330 +1,50 @@
 {
-  "best_model_key": "word2vec_lr",
-  "best_model_name": "Word2Vec + Logistic Regression",
+  "best_model_key": "muril",
+  "best_model_name": "MuRIL (google/muril-base-cased)",
   "models": [
     {
-      "model_key": "word2vec_lr",
-      "model_name": "Word2Vec + Logistic Regression",
-      "accuracy": 0.45,
-      "macro_f1": 0.4001,
-      "weighted_f1": 0.473,
-      "precision_macro": 0.4272,
-      "recall_macro": 0.425,
+      "model_key": "muril",
+      "model_name": "MuRIL (google/muril-base-cased)",
+      "accuracy": 0.8976,
+      "macro_f1": 0.9005,
+      "weighted_f1": 0.8992,
+      "precision_macro": 0.9079,
+      "recall_macro": 0.9055,
       "per_class": {
         "Favour": {
-          "precision": 0.4815,
-          "recall": 0.5417,
-          "f1": 0.5098,
-          "support": 24
+          "precision": 0.9824,
+          "recall": 0.8237,
+          "f1": 0.8961,
+          "support": 1356
         },
         "Against": {
-          "precision": 0.1333,
-          "recall": 0.3333,
-          "f1": 0.1905,
-          "support": 6
+          "precision": 0.9654,
+          "recall": 0.9197,
+          "f1": 0.942,
+          "support": 971
         },
         "None": {
-          "precision": 0.6667,
-          "recall": 0.4,
-          "f1": 0.5,
-          "support": 30
+          "precision": 0.7758,
+          "recall": 0.9731,
+          "f1": 0.8633,
+          "support": 1042
         }
       },
       "confusion_matrix": [
         [
-          13,
-          5,
-          6
-        ],
-        [
-          4,
-          2,
-          0
-        ],
-        [
-          10,
-          8,
-          12
-        ]
-      ],
-      "labels": [
-        "Favour",
-        "Against",
-        "None"
-      ],
-      "language_metrics": {
-        "Bengali": {
-          "samples": 17,
-          "accuracy": 0.5294,
-          "macro_f1": 0.4286
-        },
-        "English": {
-          "samples": 30,
-          "accuracy": 0.4333,
-          "macro_f1": 0.3676
-        },
-        "Hindi": {
-          "samples": 13,
-          "accuracy": 0.3846,
-          "macro_f1": 0.3016
-        }
-      },
-      "avg_inference_ms": 0.0699,
-      "test_samples": 60
-    },
-    {
-      "model_key": "tfidf_svm",
-      "model_name": "TF-IDF + Linear SVM",
-      "accuracy": 0.5833,
-      "macro_f1": 0.399,
-      "weighted_f1": 0.5485,
-      "precision_macro": 0.3796,
-      "recall_macro": 0.4222,
-      "per_class": {
-        "Favour": {
-          "precision": 0.5,
-          "recall": 0.5,
-          "f1": 0.5,
-          "support": 24
-        },
-        "Against": {
-          "precision": 0.0,
-          "recall": 0.0,
-          "f1": 0.0,
-          "support": 6
-        },
-        "None": {
-          "precision": 0.6389,
-          "recall": 0.7667,
-          "f1": 0.697,
-          "support": 30
-        }
-      },
-      "confusion_matrix": [
-        [
-          12,
-          0,
-          12
-        ],
-        [
-          5,
-          0,
-          1
-        ],
-        [
-          7,
-          0,
-          23
-        ]
-      ],
-      "labels": [
-        "Favour",
-        "Against",
-        "None"
-      ],
-      "language_metrics": {
-        "Bengali": {
-          "samples": 17,
-          "accuracy": 0.6471,
-          "macro_f1": 0.4238
-        },
-        "English": {
-          "samples": 30,
-          "accuracy": 0.6,
-          "macro_f1": 0.416
-        },
-        "Hindi": {
-          "samples": 13,
-          "accuracy": 0.4615,
-          "macro_f1": 0.3056
-        }
-      },
-      "avg_inference_ms": 0.4761,
-      "test_samples": 60
-    },
-    {
-      "model_key": "tfidf_nb",
-      "model_name": "TF-IDF + Multinomial Naive Bayes",
-      "accuracy": 0.55,
-      "macro_f1": 0.3753,
-      "weighted_f1": 0.5181,
-      "precision_macro": 0.3562,
-      "recall_macro": 0.3972,
-      "per_class": {
-        "Favour": {
-          "precision": 0.44,
-          "recall": 0.4583,
-          "f1": 0.449,
-          "support": 24
-        },
-        "Against": {
-          "precision": 0.0,
-          "recall": 0.0,
-          "f1": 0.0,
-          "support": 6
-        },
-        "None": {
-          "precision": 0.6286,
-          "recall": 0.7333,
-          "f1": 0.6769,
-          "support": 30
-        }
-      },
-      "confusion_matrix": [
-        [
-          11,
-          0,
-          13
-        ],
-        [
-          6,
-          0,
-          0
-        ],
-        [
-          8,
-          0,
-          22
-        ]
-      ],
-      "labels": [
-        "Favour",
-        "Against",
-        "None"
-      ],
-      "language_metrics": {
-        "Bengali": {
-          "samples": 17,
-          "accuracy": 0.4706,
-          "macro_f1": 0.2635
-        },
-        "English": {
-          "samples": 30,
-          "accuracy": 0.6667,
-          "macro_f1": 0.4632
-        },
-        "Hindi": {
-          "samples": 13,
-          "accuracy": 0.3846,
-          "macro_f1": 0.2929
-        }
-      },
-      "avg_inference_ms": 0.3944,
-      "test_samples": 60
-    },
-    {
-      "model_key": "tfidf_logreg",
-      "model_name": "TF-IDF + Logistic Regression",
-      "accuracy": 0.5,
-      "macro_f1": 0.3651,
-      "weighted_f1": 0.5036,
-      "precision_macro": 0.3672,
-      "recall_macro": 0.3639,
-      "per_class": {
-        "Favour": {
-          "precision": 0.4231,
-          "recall": 0.4583,
-          "f1": 0.44,
-          "support": 24
-        },
-        "Against": {
-          "precision": 0.0,
-          "recall": 0.0,
-          "f1": 0.0,
-          "support": 6
-        },
-        "None": {
-          "precision": 0.6786,
-          "recall": 0.6333,
-          "f1": 0.6552,
-          "support": 30
-        }
-      },
-      "confusion_matrix": [
-        [
-          11,
-          4,
-          9
-        ],
-        [
-          6,
-          0,
-          0
-        ],
-        [
-          9,
-          2,
-          19
-        ]
-      ],
-      "labels": [
-        "Favour",
-        "Against",
-        "None"
-      ],
-      "language_metrics": {
-        "Bengali": {
-          "samples": 17,
-          "accuracy": 0.4706,
-          "macro_f1": 0.3622
-        },
-        "English": {
-          "samples": 30,
-          "accuracy": 0.6,
-          "macro_f1": 0.416
-        },
-        "Hindi": {
-          "samples": 13,
-          "accuracy": 0.3077,
-          "macro_f1": 0.2424
-        }
-      },
-      "avg_inference_ms": 0.407,
-      "test_samples": 60
-    },
-    {
-      "model_key": "fasttext_lr",
-      "model_name": "FastText + Logistic Regression",
-      "accuracy": 0.3667,
-      "macro_f1": 0.2839,
-      "weighted_f1": 0.3959,
-      "precision_macro": 0.3155,
-      "recall_macro": 0.2611,
-      "per_class": {
-        "Favour": {
-          "precision": 0.375,
-          "recall": 0.25,
-          "f1": 0.3,
-          "support": 24
-        },
-        "Against": {
-          "precision": 0.0,
-          "recall": 0.0,
-          "f1": 0.0,
-          "support": 6
-        },
-        "None": {
-          "precision": 0.5714,
-          "recall": 0.5333,
-          "f1": 0.5517,
-          "support": 30
-        }
-      },
-      "confusion_matrix": [
-        [
-          6,
-          9,
-          9
+          1117,
+          21,
+          218
         ],
         [
           3,
-          0,
-          3
+          893,
+          75
         ],
         [
-          7,
-          7,
-          16
+          17,
+          11,
+          1014
         ]
       ],
       "labels": [
@@ -334,23 +54,237 @@
       ],
       "language_metrics": {
         "Bengali": {
-          "samples": 17,
-          "accuracy": 0.2353,
-          "macro_f1": 0.1667
+          "samples": 789,
+          "accuracy": 0.9937,
+          "macro_f1": 0.993
         },
         "English": {
-          "samples": 30,
-          "accuracy": 0.4,
-          "macro_f1": 0.3244
+          "samples": 1795,
+          "accuracy": 0.8139,
+          "macro_f1": 0.8167
         },
         "Hindi": {
-          "samples": 13,
-          "accuracy": 0.4615,
-          "macro_f1": 0.3175
+          "samples": 785,
+          "accuracy": 0.9924,
+          "macro_f1": 0.9902
         }
       },
-      "avg_inference_ms": 0.2913,
-      "test_samples": 60
+      "avg_inference_ms": 2.6985,
+      "test_samples": 3369,
+      "training_seconds": 104.85
+    },
+    {
+      "model_key": "indicbert",
+      "model_name": "IndicBERTv2 (ai4bharat/IndicBERTv2-MLM-only)",
+      "accuracy": 0.8848,
+      "macro_f1": 0.8891,
+      "weighted_f1": 0.8869,
+      "precision_macro": 0.8966,
+      "recall_macro": 0.891,
+      "per_class": {
+        "Favour": {
+          "precision": 0.9327,
+          "recall": 0.8282,
+          "f1": 0.8773,
+          "support": 1356
+        },
+        "Against": {
+          "precision": 0.991,
+          "recall": 0.9042,
+          "f1": 0.9456,
+          "support": 971
+        },
+        "None": {
+          "precision": 0.7662,
+          "recall": 0.9405,
+          "f1": 0.8445,
+          "support": 1042
+        }
+      },
+      "confusion_matrix": [
+        [
+          1123,
+          4,
+          229
+        ],
+        [
+          23,
+          878,
+          70
+        ],
+        [
+          58,
+          4,
+          980
+        ]
+      ],
+      "labels": [
+        "Favour",
+        "Against",
+        "None"
+      ],
+      "language_metrics": {
+        "Bengali": {
+          "samples": 789,
+          "accuracy": 0.9861,
+          "macro_f1": 0.9832
+        },
+        "English": {
+          "samples": 1795,
+          "accuracy": 0.7955,
+          "macro_f1": 0.8034
+        },
+        "Hindi": {
+          "samples": 785,
+          "accuracy": 0.9873,
+          "macro_f1": 0.9837
+        }
+      },
+      "avg_inference_ms": 2.9539,
+      "test_samples": 3369,
+      "training_seconds": 109.32
+    },
+    {
+      "model_key": "mbert",
+      "model_name": "mBERT (bert-base-multilingual-cased)",
+      "accuracy": 0.873,
+      "macro_f1": 0.8767,
+      "weighted_f1": 0.874,
+      "precision_macro": 0.8915,
+      "recall_macro": 0.8851,
+      "per_class": {
+        "Favour": {
+          "precision": 0.9875,
+          "recall": 0.7588,
+          "f1": 0.8582,
+          "support": 1356
+        },
+        "Against": {
+          "precision": 0.949,
+          "recall": 0.9011,
+          "f1": 0.9245,
+          "support": 971
+        },
+        "None": {
+          "precision": 0.7381,
+          "recall": 0.9952,
+          "f1": 0.8476,
+          "support": 1042
+        }
+      },
+      "confusion_matrix": [
+        [
+          1029,
+          45,
+          282
+        ],
+        [
+          10,
+          875,
+          86
+        ],
+        [
+          3,
+          2,
+          1037
+        ]
+      ],
+      "labels": [
+        "Favour",
+        "Against",
+        "None"
+      ],
+      "language_metrics": {
+        "Bengali": {
+          "samples": 789,
+          "accuracy": 0.9392,
+          "macro_f1": 0.9464
+        },
+        "English": {
+          "samples": 1795,
+          "accuracy": 0.7972,
+          "macro_f1": 0.8025
+        },
+        "Hindi": {
+          "samples": 785,
+          "accuracy": 0.9796,
+          "macro_f1": 0.978
+        }
+      },
+      "avg_inference_ms": 2.9326,
+      "test_samples": 3369,
+      "training_seconds": 108.47
+    },
+    {
+      "model_key": "xlmr",
+      "model_name": "XLM-RoBERTa (xlm-roberta-base)",
+      "accuracy": 0.8718,
+      "macro_f1": 0.875,
+      "weighted_f1": 0.8729,
+      "precision_macro": 0.8783,
+      "recall_macro": 0.8729,
+      "per_class": {
+        "Favour": {
+          "precision": 0.8653,
+          "recall": 0.8673,
+          "f1": 0.8663,
+          "support": 1356
+        },
+        "Against": {
+          "precision": 0.9701,
+          "recall": 0.9032,
+          "f1": 0.9355,
+          "support": 971
+        },
+        "None": {
+          "precision": 0.7993,
+          "recall": 0.8484,
+          "f1": 0.8231,
+          "support": 1042
+        }
+      },
+      "confusion_matrix": [
+        [
+          1176,
+          14,
+          166
+        ],
+        [
+          38,
+          877,
+          56
+        ],
+        [
+          145,
+          13,
+          884
+        ]
+      ],
+      "labels": [
+        "Favour",
+        "Against",
+        "None"
+      ],
+      "language_metrics": {
+        "Bengali": {
+          "samples": 789,
+          "accuracy": 0.9911,
+          "macro_f1": 0.9893
+        },
+        "English": {
+          "samples": 1795,
+          "accuracy": 0.7671,
+          "macro_f1": 0.7773
+        },
+        "Hindi": {
+          "samples": 785,
+          "accuracy": 0.9911,
+          "macro_f1": 0.9891
+        }
+      },
+      "avg_inference_ms": 3.211,
+      "test_samples": 3369,
+      "training_seconds": 117.3
     }
   ]
 }
