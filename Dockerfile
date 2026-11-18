@@ -1,17 +1,24 @@
 FROM node:22-bookworm-slim
 
-# Install Python 3.11 & build essentials
+# Install Python 3.11, SSL certs, and build tools for any sdist/wheel fallback
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 python3-venv python3-pip \
+    ca-certificates \
+    build-essential \
+    python3 \
+    python3-dev \
+    python3-venv \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Install Python ML dependencies into .venv (CPU PyTorch + requirements)
+# Upgrade pip/setuptools/wheel first, then install CPU PyTorch and Python dependencies
 COPY requirements.txt ./
 RUN python3 -m venv /app/.venv \
-    && /app/.venv/bin/pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch \
-    && /app/.venv/bin/pip install --no-cache-dir -r requirements.txt
+    && /app/.venv/bin/python -m pip install --no-cache-dir --upgrade pip setuptools wheel \
+    && (/app/.venv/bin/python -m pip install --no-cache-dir --prefer-binary --index-url https://download.pytorch.org/whl/cpu torch \
+        || /app/.venv/bin/python -m pip install --no-cache-dir --prefer-binary torch) \
+    && /app/.venv/bin/python -m pip install --no-cache-dir --prefer-binary -r requirements.txt
 
 # Install Node dependencies & build React frontend
 COPY package.json bun.lock* ./
