@@ -1,0 +1,42 @@
+{
+  "dataset_id": "mlburnham/Pol_NLI",
+  "splits": {
+    "train": {
+      "num_rows": 171289,
+      "columns": [
+        "premise",
+        "hypothesis",
+        "entailment",
+        "dataset",
+        "task",
+        "augmented_hypothesis"
+      ],
+      "climate_rows": 3584
+    },
+    "validation": {
+      "num_rows": 15036,
+      "columns": [
+        "premise",
+        "hypothesis",
+        "entailment",
+        "dataset",
+        "task",
+        "augmented_hypothesis"
+      ],
+      "climate_rows": 92
+    },
+    "test": {
+      "num_rows": 15366,
+      "columns": [
+        "premise",
+        "hypothesis",
+        "entailment",
+        "dataset",
+        "task",
+        "augmented_hypothesis"
+      ],
+      "climate_rows": 0
+    }
+  },
+  "climate_subset_saved": true
+}

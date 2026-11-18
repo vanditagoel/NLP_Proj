@@ -1,0 +1,8 @@
+{
+  "name": "IndicClimate AI",
+  "description": "Multilingual climate stance detection across Indic languages with real-time inference, model benchmarking, dataset analytics, and batch CSV analysis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

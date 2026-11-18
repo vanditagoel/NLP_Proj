@@ -1,0 +1,15 @@
+{
+  "mode": "pol_nli_auxiliary",
+  "dataset_origin": "mlburnham/Pol_NLI",
+  "total_rows": 6000,
+  "splits": {
+    "Train": 4000,
+    "Validation": 1000,
+    "Test": 1000
+  },
+  "labels": {
+    "not_entailment": 3342,
+    "entailment": 2658
+  },
+  "note": "Preserves native Pol_NLI binary entailment task; not relabeled as 3-class climate stance."
+}

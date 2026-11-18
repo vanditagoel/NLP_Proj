@@ -1,0 +1,240 @@
+{
+  "dataset_id": "mlburnham/Pol_NLI",
+  "splits": {
+    "train": {
+      "rows": 171289,
+      "columns": [
+        "premise",
+        "hypothesis",
+        "entailment",
+        "dataset",
+        "task",
+        "augmented_hypothesis"
+      ],
+      "dtypes": {
+        "premise": "str",
+        "hypothesis": "str",
+        "entailment": "int64",
+        "dataset": "str",
+        "task": "str",
+        "augmented_hypothesis": "str"
+      },
+      "missing_values": {
+        "premise": 0,
+        "hypothesis": 0,
+        "entailment": 0,
+        "dataset": 0,
+        "task": 0,
+        "augmented_hypothesis": 0
+      },
+      "duplicate_rows": 784,
+      "duplicate_premises": 61134,
+      "entailment_distribution": {
+        "1": 95474,
+        "0": 75815
+      },
+      "top_subdatasets": {
+        "mlburnham/PoliStance_Affect": 23139,
+        "mlburnham/targeted_hatespeech_entailment": 20002,
+        "mlburnham/dem_rep_party_platform_topics": 17287,
+        "mlburnham/bill_summary_entailment": 16172,
+        "mlburnham/argument_quality_ranking_entailment": 14026,
+        "mlburnham/acled_event_entailment": 12612,
+        "mlburnham/supreme_court_summary_entailment": 11353,
+        "mlburnham/polistance_issue_tweets": 10993,
+        "mlburnham/gtd_event_entailment": 8825,
+        "mlburnham/dehumanizing_hatespeech_entailment": 5667
+      },
+      "sample_rows": [
+        {
+          "premise": "Global warming is a hoax.",
+          "hypothesis": "Climate change is a serious concern.",
+          "entailment": 1,
+          "dataset": "mlburnham/global_warming_stance_entailment",
+          "task": "stance detection",
+          "augmented_hypothesis": "Climate change is a serious concern."
+        },
+        {
+          "premise": "Over the past several years, the United States has seen an increase in business growth that has counteracted the lingering effects of the recession.",
+          "hypothesis": "Climate change is a serious concern.",
+          "entailment": 1,
+          "dataset": "mlburnham/global_warming_stance_entailment",
+          "task": "stance detection",
+          "augmented_hypothesis": "The changing climate poses a major threat."
+        },
+        {
+          "premise": "Global warming is happening and it will be dangerous to human health and welfare.",
+          "hypothesis": "Climate change is a serious concern.",
+          "entailment": 0,
+          "dataset": "mlburnham/global_warming_stance_entailment",
+          "task": "stance detection",
+          "augmented_hypothesis": "Global warming is a significant issue."
+        }
+      ]
+    },
+    "validation": {
+      "rows": 15036,
+      "columns": [
+        "premise",
+        "hypothesis",
+        "entailment",
+        "dataset",
+        "task",
+        "augmented_hypothesis"
+      ],
+      "dtypes": {
+        "premise": "str",
+        "hypothesis": "str",
+        "entailment": "int64",
+        "dataset": "str",
+        "task": "str",
+        "augmented_hypothesis": "str"
+      },
+      "missing_values": {
+        "premise": 0,
+        "hypothesis": 0,
+        "entailment": 0,
+        "dataset": 0,
+        "task": 0,
+        "augmented_hypothesis": 0
+      },
+      "duplicate_rows": 7,
+      "duplicate_premises": 805,
+      "entailment_distribution": {
+        "1": 8697,
+        "0": 6339
+      },
+      "top_subdatasets": {
+        "mlburnham/dem_rep_party_platform_topics": 2200,
+        "mlburnham/targeted_hatespeech_entailment": 1906,
+        "mlburnham/bill_summary_entailment": 1816,
+        "mlburnham/PoliStance_Affect": 1427,
+        "mlburnham/violent_hatespeech_entailment": 1396,
+        "mlburnham/argument_quality_ranking_entailment": 1389,
+        "mlburnham/acled_event_entailment": 1331,
+        "mlburnham/scad_event_entailment": 1121,
+        "mlburnham/ibm_claimstance_topic_entailment": 506,
+        "mlburnham/polistance_issue_tweets": 336
+      },
+      "sample_rows": [
+        {
+          "premise": "Sounds like she has daddy issues lol",
+          "hypothesis": "This text advocates for violence against the middle aged.",
+          "entailment": 1,
+          "dataset": "mlburnham/violent_hatespeech_entailment",
+          "task": "hatespeech and toxicity",
+          "augmented_hypothesis": "This passage supports hostility directed at those in their middle age."
+        },
+        {
+          "premise": "I can't say I like Alba's views either, but oh my god does this accurately portray what it's like for Latinas to grow up in a modern pro-feminist society and interact with the older generations of women in our family. I think the dialogue they give portrays this really well.",
+          "hypothesis": "This text advocates for violence against the middle aged.",
+          "entailment": 1,
+          "dataset": "mlburnham/violent_hatespeech_entailment",
+          "task": "hatespeech and toxicity",
+          "augmented_hypothesis": "This text advocates for violence against the middle aged."
+        },
+        {
+          "premise": "Dirty little bitch.. I need to punish you with my cock in your ass!",
+          "hypothesis": "This text advocates for violence against the middle aged.",
+          "entailment": 1,
+          "dataset": "mlburnham/violent_hatespeech_entailment",
+          "task": "hatespeech and toxicity",
+          "augmented_hypothesis": "This passage supports hostility directed at those in their middle age."
+        }
+      ]
+    },
+    "test": {
+      "rows": 15366,
+      "columns": [
+        "premise",
+        "hypothesis",
+        "entailment",
+        "dataset",
+        "task",
+        "augmented_hypothesis"
+      ],
+      "dtypes": {
+        "premise": "str",
+        "hypothesis": "str",
+        "entailment": "int64",
+        "dataset": "str",
+        "task": "str",
+        "augmented_hypothesis": "str"
+      },
+      "missing_values": {
+        "premise": 0,
+        "hypothesis": 0,
+        "entailment": 0,
+        "dataset": 0,
+        "task": 0,
+        "augmented_hypothesis": 0
+      },
+      "duplicate_rows": 12,
+      "duplicate_premises": 1462,
+      "entailment_distribution": {
+        "1": 9080,
+        "0": 6286
+      },
+      "top_subdatasets": {
+        "mlburnham/PoliStance_Affect": 3006,
+        "mlburnham/dem_rep_party_platform_topics": 2377,
+        "mlburnham/acled_event_entailment": 1818,
+        "mlburnham/bill_summary_entailment": 1723,
+        "mlburnham/targeted_hatespeech_entailment": 1396,
+        "mlburnham/violent_hatespeech_entailment": 1351,
+        "mlburnham/argument_quality_ranking_entailment": 1267,
+        "mlburnham/scad_event_entailment": 1046,
+        "mlburnham/ibm_claimstance_topic_entailment": 407,
+        "mlburnham/PoliStance_Affect_QT": 341
+      },
+      "sample_rows": [
+        {
+          "premise": "Transport workers strike to protest rising fuel costs.",
+          "hypothesis": "The event described in this text is a strike.",
+          "entailment": 0,
+          "dataset": "mlburnham/scad_event_entailment",
+          "task": "event extraction",
+          "augmented_hypothesis": "The incident mentioned in this text is a strike."
+        },
+        {
+          "premise": "Municipal workers strike over pay.",
+          "hypothesis": "The event described in this text is a strike.",
+          "entailment": 0,
+          "dataset": "mlburnham/scad_event_entailment",
+          "task": "event extraction",
+          "augmented_hypothesis": "The occurrence detailed in this passage is a strike."
+        },
+        {
+          "premise": "Niger's mining sector strikes.",
+          "hypothesis": "The event described in this text is a strike.",
+          "entailment": 0,
+          "dataset": "mlburnham/scad_event_entailment",
+          "task": "event extraction",
+          "augmented_hypothesis": "The event described in this text is a strike."
+        }
+      ]
+    }
+  },
+  "total_rows": 201691,
+  "global_warming_subset": {
+    "total_nli_rows": 3607,
+    "unique_premises": 1752,
+    "hypotheses": {
+      "Climate change is a serious concern.": 1814,
+      "Climate change is not a concern.": 1793
+    },
+    "reconstructed_3class_counts": {
+      "Favour": 571,
+      "Against": 261,
+      "None": 537
+    },
+    "reconstructed_total": 1369,
+    "excluded_ambiguous_or_partial_premises": 383
+  },
+  "compatibility_analysis": {
+    "task_formulation": "Binary NLI entailment (premise + hypothesis -> entailment 0/1) across multiple political corpora.",
+    "directly_compatible_raw_rows": false,
+    "reason": "Raw Pol_NLI rows are binary NLI pairs (entailment=0 or not_entailment=1) spanning many political topics (elections, partisanship, COVID, guns, global warming). Blindly mapping 0/1 to Favour/Against/None would be invalid.",
+    "legitimate_resolution": "1) Isolate the embedded `mlburnham/global_warming_stance_entailment` subset where each premise is paired with `Climate change is a serious concern.` and `Climate change is not a concern.`; reconstruct exact 3-class stance (Favour / Against / None) only for unambiguous paired annotations and exclude contradictory/partial premises. 2) Preserve full Pol_NLI separately with native binary labels for auxiliary NLI experiments."
+  }
+}

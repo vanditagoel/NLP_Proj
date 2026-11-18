@@ -1,0 +1,26 @@
+{
+  "mode": "climate_stance",
+  "dataset_origin": "pol_nli_paired_hypotheses + translated_hi_bn",
+  "total_rows": 400,
+  "unique_groups": 200,
+  "splits": {
+    "Train": 280,
+    "Validation": 60,
+    "Test": 60
+  },
+  "languages": {
+    "English": 200,
+    "Hindi": 100,
+    "Bengali": 100
+  },
+  "labels": {
+    "None": 190,
+    "Favour": 160,
+    "Against": 50
+  },
+  "translation_status": {
+    "Original": 200,
+    "Translated": 200
+  },
+  "leakage_verified": true
+}

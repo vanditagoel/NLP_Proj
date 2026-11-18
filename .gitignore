@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.env
+models/trained/
+models/muril/
+models/mbert/
+models/xlmr/
+models/indicbert/
+models/pol_nli_auxiliary/
+data/raw/*.parquet
+*.zip

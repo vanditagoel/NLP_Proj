@@ -1,0 +1,8 @@
+[
+  "tests/test_pipeline.py::test_classical_model_training_prediction_and_evaluation",
+  "tests/test_pipeline.py::test_fastapi_endpoints_and_csv_batch",
+  "tests/test_pipeline.py::test_group_stratified_split_prevents_leakage",
+  "tests/test_pipeline.py::test_script_language_detection",
+  "tests/test_pipeline.py::test_text_cleaning_preserves_indic_scripts",
+  "tests/test_pipeline.py::test_translation_allocation_and_mock_pipeline"
+]

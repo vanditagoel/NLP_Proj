@@ -1,0 +1,71 @@
+{
+  "dataset_path": "/app/applet/data/processed/climate_stance_dataset.csv",
+  "total_samples": 400,
+  "split_distribution": {
+    "Train": 280,
+    "Validation": 60,
+    "Test": 60
+  },
+  "class_distribution": {
+    "None": 190,
+    "Favour": 160,
+    "Against": 50
+  },
+  "language_distribution": {
+    "English": 200,
+    "Hindi": 100,
+    "Bengali": 100
+  },
+  "missing_values": {
+    "id": 0,
+    "original_id": 0,
+    "group_id": 0,
+    "original_text": 0,
+    "text": 0,
+    "language": 0,
+    "language_code": 0,
+    "label": 0,
+    "original_label": 0,
+    "original_source": 0,
+    "translation_language": 0,
+    "translation_status": 0,
+    "is_machine_translated": 0,
+    "split": 0,
+    "char_length": 0,
+    "word_length": 0
+  },
+  "duplicate_texts": 0,
+  "text_length_chars": {
+    "mean": 112.66,
+    "median": 103.0,
+    "min": 22,
+    "max": 342
+  },
+  "text_length_words": {
+    "mean": 19.29,
+    "median": 18.0,
+    "min": 4,
+    "max": 51
+  },
+  "language_by_class": {
+    "Bengali": {
+      "Against": 15,
+      "Favour": 38,
+      "None": 47
+    },
+    "English": {
+      "Against": 25,
+      "Favour": 80,
+      "None": 95
+    },
+    "Hindi": {
+      "Against": 10,
+      "Favour": 42,
+      "None": 48
+    }
+  },
+  "translation_status": {
+    "Original": 200,
+    "Translated": 200
+  }
+}

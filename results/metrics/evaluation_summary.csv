@@ -1,0 +1,6 @@
+model_key,model_name,accuracy,macro_f1,weighted_f1,precision_macro,recall_macro,hindi_macro_f1,bengali_macro_f1,english_macro_f1,avg_inference_ms
+word2vec_lr,Word2Vec + Logistic Regression,0.45,0.4001,0.473,0.4272,0.425,0.3016,0.4286,0.3676,0.0699
+tfidf_svm,TF-IDF + Linear SVM,0.5833,0.399,0.5485,0.3796,0.4222,0.3056,0.4238,0.416,0.4761
+tfidf_nb,TF-IDF + Multinomial Naive Bayes,0.55,0.3753,0.5181,0.3562,0.3972,0.2929,0.2635,0.4632,0.3944
+tfidf_logreg,TF-IDF + Logistic Regression,0.5,0.3651,0.5036,0.3672,0.3639,0.2424,0.3622,0.416,0.407
+fasttext_lr,FastText + Logistic Regression,0.3667,0.2839,0.3959,0.3155,0.2611,0.3175,0.1667,0.3244,0.2913
