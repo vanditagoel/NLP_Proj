@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Award, CheckCircle2, Clock, Loader2, Play } from 'lucide-react';
+import { Award, CheckCircle2, Clock, Grid3X3, Image as ImageIcon, Loader2, Play } from 'lucide-react';
 import { api } from '../services/api';
 import type { EvaluationSummary, RegisteredModel } from '../types';
 
@@ -13,6 +13,7 @@ export function ModelsPage({ models, evaluation, onRefresh }: ModelsPageProps) {
   const [selectedKey, setSelectedKey] = useState<string>(
     evaluation?.best_model_key || evaluation?.models?.[0]?.model_key || 'muril'
   );
+  const [cmViewMode, setCmViewMode] = useState<'matrix' | 'png'>('matrix');
   const [trainingBusy, setTrainingBusy] = useState(false);
   const [trainMsg, setTrainMsg] = useState<string | null>(null);
 
@@ -32,7 +33,11 @@ export function ModelsPage({ models, evaluation, onRefresh }: ModelsPageProps) {
           if (!st.running) {
             clearInterval(timer);
             setTrainingBusy(false);
-            setTrainMsg(st.last_error ? `Error: ${st.last_error}` : 'All 4 Transformer models retrained, saved & evaluated.');
+            setTrainMsg(
+              st.last_error
+                ? `Error: ${st.last_error}`
+                : 'All 4 Transformer models retrained, saved & evaluated.'
+            );
             onRefresh();
           }
         }, 1500);
@@ -88,12 +93,19 @@ export function ModelsPage({ models, evaluation, onRefresh }: ModelsPageProps) {
             <tbody className="divide-y divide-slate-200 bg-white">
               {models.map((m) => {
                 const isBest = evaluation?.best_model_key === m.model_key;
+                const isSelected = activeEval?.model_key === m.model_key;
                 const lm = m.metrics?.language_metrics || {};
                 return (
                   <tr
                     key={m.model_key}
                     onClick={() => m.trained && setSelectedKey(m.model_key)}
-                    className={m.trained ? 'cursor-pointer hover:bg-slate-50' : 'bg-slate-50/40 text-slate-500'}
+                    className={
+                      m.trained
+                        ? `cursor-pointer transition-colors ${
+                            isSelected ? 'bg-teal-50/60' : 'hover:bg-slate-50'
+                          }`
+                        : 'bg-slate-50/40 text-slate-500'
+                    }
                   >
                     <td className="px-4 py-2.5 font-medium text-slate-900">
                       <div className="flex items-center gap-1.5">
@@ -104,7 +116,7 @@ export function ModelsPage({ models, evaluation, onRefresh }: ModelsPageProps) {
                     <td className="px-4 py-2.5 text-xs text-slate-600">{m.family}</td>
                     <td className="px-4 py-2.5 text-xs">
                       {m.trained ? (
-                        <span className="inline-flex items-center gap-1 text-emerald-700 font-medium">
+                        <span className="inline-flex items-center gap-1 font-medium text-emerald-700">
                           <CheckCircle2 className="h-3.5 w-3.5" /> Trained
                         </span>
                       ) : (
@@ -136,55 +148,188 @@ export function ModelsPage({ models, evaluation, onRefresh }: ModelsPageProps) {
         </div>
       </section>
 
+      {evalModels.length > 0 && (
+        <section className="rounded-xl border border-slate-200 bg-white p-6">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-base font-bold text-slate-900">
+                Confusion Matrices — All Models ({evalModels.length})
+              </h2>
+              <p className="mt-1 text-xs text-slate-500">
+                Rows = True Label, Columns = Predicted Label on {evalModels[0].test_samples.toLocaleString()} held-out test samples.
+              </p>
+            </div>
+
+            <div className="inline-flex rounded-lg border border-slate-200 bg-slate-50 p-0.5 text-xs">
+              <button
+                type="button"
+                onClick={() => setCmViewMode('matrix')}
+                className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 font-medium transition-colors ${
+                  cmViewMode === 'matrix'
+                    ? 'bg-white text-slate-900 shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <Grid3X3 className="h-3.5 w-3.5" />
+                Heatmap Matrix
+              </button>
+              <button
+                type="button"
+                onClick={() => setCmViewMode('png')}
+                className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 font-medium transition-colors ${
+                  cmViewMode === 'png'
+                    ? 'bg-white text-slate-900 shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <ImageIcon className="h-3.5 w-3.5" />
+                Chart PNG
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-5 grid gap-5 md:grid-cols-2">
+            {evalModels.map((em) => {
+              const isBest = evaluation?.best_model_key === em.model_key;
+              const maxCell = Math.max(1, ...em.confusion_matrix.flat());
+              return (
+                <div
+                  key={em.model_key}
+                  className={`rounded-xl border p-4 ${
+                    isBest ? 'border-teal-300 bg-teal-50/20' : 'border-slate-200 bg-slate-50/40'
+                  }`}
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5">
+                      {isBest && <Award className="h-4 w-4 text-teal-700" />}
+                      <h3 className="text-sm font-bold text-slate-900">{em.model_name}</h3>
+                    </div>
+                    <div className="flex items-center gap-2 font-mono text-xs text-slate-600">
+                      <span>Acc {(em.accuracy * 100).toFixed(2)}%</span>
+                      <span>·</span>
+                      <span className="font-semibold text-teal-800">
+                        F1 {(em.macro_f1 * 100).toFixed(2)}%
+                      </span>
+                    </div>
+                  </div>
+
+                  {cmViewMode === 'png' ? (
+                    <div className="mt-3 overflow-hidden rounded-lg border border-slate-200 bg-white">
+                      <img
+                        src={`/charts/cm_${em.model_key}.png`}
+                        alt={`Confusion Matrix — ${em.model_name}`}
+                        className="w-full"
+                      />
+                    </div>
+                  ) : (
+                    <div className="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+                      <table className="w-full border-collapse text-center text-xs">
+                        <thead>
+                          <tr>
+                            <th className="border-b border-r border-slate-200 bg-slate-50 p-2 text-left text-[11px] font-semibold text-slate-500">
+                              True \ Pred
+                            </th>
+                            {em.labels.map((lbl) => (
+                              <th
+                                key={lbl}
+                                className="border-b border-slate-200 bg-slate-50 p-2 font-semibold text-slate-700"
+                              >
+                                {lbl}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {em.confusion_matrix.map((row, rIdx) => {
+                            const rowSum = Math.max(
+                              1,
+                              row.reduce((a, b) => a + b, 0)
+                            );
+                            return (
+                              <tr key={rIdx}>
+                                <td className="border-r border-t border-slate-200 bg-slate-50 px-2.5 py-2 text-left font-semibold text-slate-700">
+                                  {em.labels[rIdx]}
+                                </td>
+                                {row.map((val, cIdx) => {
+                                  const ratio = val / maxCell;
+                                  const pct = ((val / rowSum) * 100).toFixed(1);
+                                  const isDiag = rIdx === cIdx;
+                                  const bgAlpha = isDiag
+                                    ? Math.min(0.85, 0.16 + ratio * 0.68)
+                                    : Math.min(0.35, ratio * 0.45);
+                                  const darkText = bgAlpha < 0.48;
+                                  return (
+                                    <td
+                                      key={cIdx}
+                                      className="border-t border-l border-slate-200 px-2 py-2.5 font-mono"
+                                      style={{
+                                        backgroundColor: isDiag
+                                          ? `rgba(15, 118, 110, ${bgAlpha.toFixed(2)})`
+                                          : `rgba(225, 29, 72, ${bgAlpha.toFixed(2)})`,
+                                        color: darkText ? '#0f172a' : '#ffffff',
+                                      }}
+                                    >
+                                      <div className="text-sm font-bold leading-tight">{val}</div>
+                                      <div
+                                        className={`text-[10px] leading-tight ${
+                                          darkText ? 'text-slate-500' : 'text-teal-50'
+                                        }`}
+                                      >
+                                        {pct}%
+                                      </div>
+                                    </td>
+                                  );
+                                })}
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+
+                  <div className="mt-3 grid grid-cols-3 gap-2 text-[11px]">
+                    {em.labels.map((lbl) => {
+                      const pc = em.per_class[lbl];
+                      return (
+                        <div
+                          key={lbl}
+                          className="rounded-md border border-slate-200 bg-white px-2.5 py-1.5"
+                        >
+                          <div className="font-semibold text-slate-800">{lbl}</div>
+                          <div className="font-mono text-slate-600">
+                            F1 {(pc?.f1 * 100).toFixed(1)}%
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
       {activeEval && (
         <section className="grid gap-6 lg:grid-cols-2">
           <div className="rounded-xl border border-slate-200 bg-white p-6">
             <h2 className="text-base font-bold text-slate-900">
-              Confusion Matrix — {activeEval.model_name}
+              Selected Model Breakdown — {activeEval.model_name}
             </h2>
             <p className="mt-1 text-xs text-slate-500">
-              Rows = True Label, Columns = Predicted Label ({activeEval.test_samples} test samples)
+              Click any model row in the benchmark table above to inspect its per-class and language metrics ({activeEval.test_samples.toLocaleString()} test samples).
             </p>
-            <div className="mt-4 overflow-x-auto">
-              <table className="w-full border-collapse text-center text-xs">
-                <thead>
-                  <tr>
-                    <th className="border border-slate-200 bg-slate-50 p-2">True \ Pred</th>
-                    {activeEval.labels.map((lbl) => (
-                      <th key={lbl} className="border border-slate-200 bg-slate-50 p-2 font-semibold">
-                        {lbl}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {activeEval.confusion_matrix.map((row, rIdx) => (
-                    <tr key={rIdx}>
-                      <td className="border border-slate-200 bg-slate-50 p-2 font-semibold">
-                        {activeEval.labels[rIdx]}
-                      </td>
-                      {row.map((val, cIdx) => (
-                        <td
-                          key={cIdx}
-                          className={`border border-slate-200 p-2.5 font-mono font-semibold ${
-                            rIdx === cIdx ? 'bg-teal-50 text-teal-900' : 'bg-white text-slate-700'
-                          }`}
-                        >
-                          {val}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
 
-            <div className="mt-5 space-y-2">
-              <p className="text-xs font-semibold uppercase text-slate-500">Per-Class F1 Breakdown</p>
+            <div className="mt-4 space-y-2">
+              <p className="text-xs font-semibold uppercase text-slate-500">Per-Class Precision / Recall / F1</p>
               {activeEval.labels.map((lbl) => {
                 const pc = activeEval.per_class[lbl];
                 return (
-                  <div key={lbl} className="flex items-center justify-between text-xs">
+                  <div
+                    key={lbl}
+                    className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs"
+                  >
                     <span className="font-medium text-slate-700">
                       {lbl} (n={pc?.support ?? 0})
                     </span>
@@ -195,6 +340,26 @@ export function ModelsPage({ models, evaluation, onRefresh }: ModelsPageProps) {
                   </div>
                 );
               })}
+            </div>
+
+            <div className="mt-5 space-y-2">
+              <p className="text-xs font-semibold uppercase text-slate-500">Language-Wise Performance</p>
+              <div className="grid grid-cols-3 gap-2">
+                {Object.entries(activeEval.language_metrics).map(([lang, lm]) => (
+                  <div
+                    key={lang}
+                    className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-xs"
+                  >
+                    <div className="font-semibold text-slate-800">{lang}</div>
+                    <div className="mt-1 font-mono text-slate-600">
+                      Acc {(lm.accuracy * 100).toFixed(1)}%
+                    </div>
+                    <div className="font-mono font-semibold text-teal-800">
+                      F1 {(lm.macro_f1 * 100).toFixed(1)}%
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
